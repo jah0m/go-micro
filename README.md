@@ -1,10 +1,11 @@
 # go-micro
 
 A simple demo of microservices implemented in Go.
-
-# Broker Service
+#
+### Broker Service
 
 A service for message brokering between microservices.
+#
 
-# Authentication Service
+### Authentication Service
 A simple authentication service implemented using JWT access tokens and refresh tokens.
