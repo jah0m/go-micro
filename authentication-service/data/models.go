@@ -199,6 +199,21 @@ func (u *User) DeleteByID(id int) error {
 	return nil
 }
 
+// Delete by email deletes one user from the database, by email
+func (u *User) DeleteByEmail(email string) error {
+	ctx, cancel := context.WithTimeout(context.Background(), dbTimeout)
+	defer cancel()
+
+	stmt := `delete from users where email = $1`
+
+	_, err := db.ExecContext(ctx, stmt, email)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // Insert inserts a new user into the database, and returns the ID of the newly inserted row
 func (u *User) Insert(user User) (int, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), dbTimeout)

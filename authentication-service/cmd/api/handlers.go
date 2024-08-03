@@ -31,10 +31,28 @@ func (app *Config) Authenticate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// generate a JWT token
+	accessToken, err := app.generateAccessToken(user)
+	if err != nil {
+		app.errorJSON(w, err, http.StatusInternalServerError)
+		return
+	}
+
+	// generate a JWT refresh token
+	refreshToken, err := app.generateRefreshToken(user)
+	if err != nil {
+		app.errorJSON(w, err, http.StatusInternalServerError)
+		return
+	}
+
 	payload := jsonResponse{
 		Error:   false,
 		Message: fmt.Sprintf("Logged in user %s", user.Email),
-		Data:    user,
+		Data: map[string]interface{}{
+			"user":          user,
+			"access_token":  accessToken,
+			"refresh_token": refreshToken,
+		},
 	}
 
 	app.writeJSON(w, http.StatusAccepted, payload)

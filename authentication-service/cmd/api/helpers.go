@@ -11,6 +11,7 @@ type jsonResponse struct {
 	Error   bool   `json:"error"`
 	Message string `json:"message"`
 	Data    any
+	Token   string `json:"token,omitempty"`
 }
 
 func (app *Config) readJSON(w http.ResponseWriter, r *http.Request, data any) error {

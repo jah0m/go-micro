@@ -19,8 +19,10 @@ const webPort = "80"
 var counts int64
 
 type Config struct {
-	DB     *sql.DB
-	Models data.Models
+	DB          *sql.DB
+	Models      data.Models
+	ACCESS_KEY  string
+	REFRESH_KEY string
 }
 
 func main() {
@@ -35,6 +37,20 @@ func main() {
 	app := Config{
 		DB:     conn,
 		Models: data.New(conn),
+		ACCESS_KEY: func() string {
+			accessKey := os.Getenv("ACCESS_KEY")
+			if accessKey == "" {
+				return "access"
+			}
+			return accessKey
+		}(),
+		REFRESH_KEY: func() string {
+			refreshKey := os.Getenv("REFRESH_KEY")
+			if refreshKey == "" {
+				return "refresh"
+			}
+			return refreshKey
+		}(),
 	}
 
 	srv := &http.Server{

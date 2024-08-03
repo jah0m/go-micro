@@ -67,7 +67,7 @@
                 action: "auth",
                 auth: {
                     email: "admin@example.com",
-                    password: "verysecret!",
+                    password: "verysecret",
                 }
             }
 
@@ -89,6 +89,7 @@
                     output.innerHTML = `<br><strong>Errors:</strong> ${data.message}`
                 } else {
                     output.innerHTML = `<br><strong>Response from broker service</strong>: ${data.message}`;
+                    output.innerHTML += `<br><strong>Token:</strong> ${data.Data.token}`;
                 }
             })
             .catch(error => {
