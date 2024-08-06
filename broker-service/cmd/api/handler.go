@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"log"
 	"net/http"
 )
 
@@ -157,7 +158,7 @@ func (app *Config) sendMail(w http.ResponseWriter, m mailPayload) {
 	jsonData, _ := json.MarshalIndent(m, "", "\t")
 
 	// call the service
-	request, err := http.NewRequest("POST", "http://mail-service/mail", bytes.NewBuffer(jsonData))
+	request, err := http.NewRequest("POST", "http://mail-service/send", bytes.NewBuffer(jsonData))
 	if err != nil {
 		app.errorJSON(w, err)
 		return
@@ -175,6 +176,7 @@ func (app *Config) sendMail(w http.ResponseWriter, m mailPayload) {
 
 	//make sure get correct status code
 	if response.StatusCode != http.StatusAccepted {
+		log.Println(response)
 		app.errorJSON(w, errors.New("error calling mail service"))
 		return
 	}
