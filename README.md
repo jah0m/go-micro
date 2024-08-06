@@ -13,3 +13,7 @@ A authentication service implemented using JWT access tokens and refresh tokens.
 
 ### Logger Service
 A logger service to save logs to MongoDB.
+#
+
+### Mail service
+A mail service to send a html/plain email.
