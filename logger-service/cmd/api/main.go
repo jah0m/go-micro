@@ -57,6 +57,9 @@ func main() {
 	}
 	go app.RPCListen()
 
+	// start the gRPC server
+	go app.gRPCListen()
+
 	// start the server
 	log.Println("Server started on port", webPort)
 	// create a new server
