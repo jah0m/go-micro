@@ -1,7 +1,7 @@
 # go-micro
 
 A simple demo of microservices implemented in Go. <br/>
-Tech stack: Go, PostgreSQL, MongoDB, RabbitMQ, RESTful API, RPC/gRPC, Docker, kubernets.
+Tech stack: Go, PostgreSQL, MongoDB, RabbitMQ, RESTful API, RPC/gRPC, Docker, kubernetes.
 #
 ### Broker Service
 A broker service as the entry point for the go-micro project.
